@@ -1,0 +1,24 @@
+version: '3'
+services:
+  grafana:
+    image: grafana/grafana:9.4.7
+    environment:
+      - GF_SECURITY_ALLOW_SIGN_UP=true
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    restart: always
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    restart: always
+
+volumes:
+  grafana-storage:
+
+
